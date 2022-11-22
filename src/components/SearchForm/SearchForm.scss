@@ -1,0 +1,42 @@
+.form {
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+  font-size: 22px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input,
+  button {
+    padding: 8px 15px;
+    margin-right: 15px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  &__btn {
+    background: #42bb83;
+    color: #f2f2f2;
+    cursor: pointer;
+
+    &:hover {
+      background: darken(#42bb83 , 10%);
+      color: darken(#f2f2f2, 10%);
+      box-shadow: 0px 3px 5px rgba(#f2f2f2, 0.1);
+    }
+
+    &:active {
+      background: darken(#42bb83 , 15%);
+      color: lighten(#f2f2f2, 10%);
+    }
+
+    &:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+  }
+}
+
