@@ -16,7 +16,7 @@ export const useFetch = (url) => {
           return res.json()
         }
 
-        throw new Error('Network failed!')
+        throw new Error('Oh, No!!! Network failed! 💥')
       })
       .then(data => {
         setData(data)

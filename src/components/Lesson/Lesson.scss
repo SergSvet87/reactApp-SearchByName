@@ -1,0 +1,42 @@
+.lesson {
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(53, 103, 125);
+
+  &__description {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h2 {
+      margin: 0;
+      padding: 0;
+      margin-right: 25px;
+    }
+
+    p {
+      font-size: 12px;
+      color: rgb(0, 255, 94);
+    }
+  }
+
+  h5 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  &__type {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    font-size: 20px;
+    
+
+    &:hover {
+      color: rgb(0, 255, 94);
+      transition: color .4s ease-in-out;
+    }
+  }
+}

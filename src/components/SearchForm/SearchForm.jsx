@@ -58,7 +58,7 @@ export const SearchForm = ({ getKeyUrl }) => {
         Enter the name or title of the lesson
       </label>
       {textInputBlur && textInputError && (
-        <h3 style={{ color: 'orangered' }}>{textInputError}</h3>
+        <h6 style={{ color: 'orangered', marginBottom: '15px' }}>{textInputError}</h6>
       )}
       <input
         className="form__input"
