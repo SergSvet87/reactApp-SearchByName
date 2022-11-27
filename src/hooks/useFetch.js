@@ -1,7 +1,7 @@
 import React from "react"
 
 export const useFetch = (url) => {
-  const [data, setData] = React.useState(null)
+  const [response, setResponse] = React.useState(null)
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState();
 
@@ -9,25 +9,40 @@ export const useFetch = (url) => {
 
     setLoading(true)
 
-    fetch(url)
+    setTimeout(() => {
 
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
+      fetch(url)
 
-        throw new Error('Oh, No!!! Network failed! 💥')
-      })
-      .then(data => {
-        setData(data)
-      })
-      .catch((e) => {
-        setError(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          }
+          if (res.status === 404) {
+            throw new Error('Oh, No!!! Not Found! 💥')
+          }
+
+          if (res.status === 500) {
+            throw new Error('Oh, No!!! Server failed! 💥')
+          }
+
+          if (res.status === 502) {
+            throw new Error('Oh, No!!! Bad Gateway failed! 💥')
+          }
+
+          throw new Error('Oh, No!!! Something went wrong: 💥')
+        })
+        .then(data => {
+          setResponse(data)
+          setError(null)
+          setLoading(false)
+        })
+        .catch(e => {
+          setLoading(false)
+          setError(e.message)
+        })
+
+    }, 1500);
   }, [url])
 
-  return { data, loading, error }
+  return { response, loading, error }
 };

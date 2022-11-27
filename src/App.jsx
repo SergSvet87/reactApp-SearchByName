@@ -6,7 +6,7 @@ import { SearchForm } from './components/SearchForm/SearchForm'
 import { SearchList } from './components/SearchList/SearchList'
 import { Loader } from './ui/Loader/Loader'
 import { useFetch } from './hooks/useFetch'
-import { useLocalStorage } from './hooks/useLocalStorage'
+// import { useLocalStorage } from './hooks/useLocalStorage'
 import { ErrorFallback } from './components/error/ErrorFallback'
 
 import './App.scss'
@@ -15,14 +15,14 @@ const API_URL = 'https://react-course-api.azurewebsites.net/lesson/'
 
 function App() {
   const [SEARCH_KEYWORD, setKeyUrl] = React.useState('')
-  const { data } = useFetch(API_URL + SEARCH_KEYWORD)
-  const [lessons, setLessons] = useLocalStorage(data, 'lessons')
+  const { response, error, loading } = useFetch(API_URL + SEARCH_KEYWORD)
+  // const [lessons, setLessons] = useLocalStorage(response, 'lessons')
 
-  React.useEffect(() => {
-    if (data) {
-      setLessons(data)
-    }
-  }, [data, setLessons])
+  // React.useEffect(() => {
+  //   if (response) {
+  //     setLessons(response)
+  //   }
+  // }, [response, setLessons])
 
   const getKeyUrl = (keyUrl) => {
     setKeyUrl(keyUrl)
@@ -34,10 +34,12 @@ function App() {
 
       <ErrorBoundary
         FallbackComponent={ErrorFallback}
-        onReset={() => getKeyUrl('')}
+        onReset={() => window.location.reload()}
       >
         <SearchForm getKeyUrl={getKeyUrl} />
-        {lessons ? <SearchList lessons={lessons} /> : <Loader />}
+        {error && <ErrorFallback error={error} />}
+        {loading && <Loader />}
+        {response && <SearchList data={response} />}
       </ErrorBoundary>
     </main>
   )

@@ -1,11 +1,13 @@
 import React from 'react'
 
-export const ErrorFallback = ({error, resetErrorBoundary}) => {
+import './ErrorFallback.scss'
+
+export const ErrorFallback = ({ error }) => {
   return (
-    <div role="alert">
+    <div className="error" role="alert">
       <p>Something went wrong:</p>
-      <pre>{error.message}</pre>
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <pre>{error}</pre>
+      {/* <button onClick={resetErrorBoundary}>Try again</button> */}
     </div>
   )
 }

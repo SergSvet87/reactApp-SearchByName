@@ -8,7 +8,7 @@ export const SearchForm = ({ getKeyUrl }) => {
   const [textInputBlur, setTextInputBlur] = React.useState(false)
   const [buttonValid, setButtonValid] = React.useState(false)
   const [textInputError, setTextInputError] = React.useState(
-    'Пошукове поле не може бути порожнім!'
+    'The search field cannot be empty!'
   )
 
   const onBlurHandler = (e) => {
@@ -18,20 +18,21 @@ export const SearchForm = ({ getKeyUrl }) => {
         break
 
       default:
-        setTextInputBlur(false)
+        setTextInput('')
         break
     }
   }
 
   const onChangeHandler = (e) => {
     let valueInput = e.target.value
+
     setTextInput(valueInput)
 
     if (valueInput.length < 3 || valueInput.length > 15) {
-      setTextInputError('Некоректна довжина назви!')
+      setTextInputError('Incorrect name length!')
 
       if (!valueInput) {
-        setTextInputError('Пошукове поле не може бути порожнім!')
+        setTextInputError('The search field cannot be empty!')
       }
     } else {
       setTextInputError('')
@@ -42,6 +43,7 @@ export const SearchForm = ({ getKeyUrl }) => {
     e.preventDefault()
     getKeyUrl(textInput)
     setTextInput('')
+    setTextInputBlur(true)
   }
 
   React.useEffect(() => {
@@ -58,7 +60,9 @@ export const SearchForm = ({ getKeyUrl }) => {
         Enter the name or title of the lesson
       </label>
       {textInputBlur && textInputError && (
-        <h6 style={{ color: 'orangered', marginBottom: '15px' }}>{textInputError}</h6>
+        <h6 style={{ color: 'orangered', marginBottom: '15px' }}>
+          {textInputError}
+        </h6>
       )}
       <input
         className="form__input"
